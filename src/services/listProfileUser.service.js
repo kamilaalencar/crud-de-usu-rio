@@ -8,9 +8,9 @@ const listProfileService = (user) => {
     return decoded.email;
   });
 
-  const user = users.find((element) => element.email === decodedEmail);
+  const userProfile = users.find((element) => element.email === decodedEmail);
 
-  return user;
+  return userProfile;
 };
 
 export default listProfileService;
