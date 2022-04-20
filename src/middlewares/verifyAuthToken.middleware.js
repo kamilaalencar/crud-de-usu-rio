@@ -6,7 +6,7 @@ const verifyAuthTokenMiddleware = (request, response, next) => {
   if (!token) {
     return response
       .status(401)
-      .json({ message: "Missing Authorization Token" });
+      .json({ message: "Missing authorization headers" });
   }
   token = token.split(" ")[1];
 
@@ -14,6 +14,8 @@ const verifyAuthTokenMiddleware = (request, response, next) => {
     if (error) {
       return response.status(401).json({ message: "Invalid Token" });
     }
+    request.user = decoded.email;
+
     next();
   });
 };

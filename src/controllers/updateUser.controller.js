@@ -1,4 +1,3 @@
-import res from "express/lib/response";
 import updateUserService from "../services/updateUser.service";
 
 const updateUserController = (request, response) => {
@@ -7,7 +6,7 @@ const updateUserController = (request, response) => {
 
   const updateUser = updateUserService(id, name, email, password);
 
-  return res.json(updateUser);
+  return response.json(updateUser);
 };
 
 export default updateUserController;

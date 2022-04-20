@@ -13,11 +13,26 @@ import verifyAuthTokenMiddleware from "../middlewares/verifyAuthToken.middleware
 
 const router = Router();
 
-router.post("", verifyEmailAvailabilityMiddleware, createUserController);
-router.get("", verifyAuthTokenMiddleware, listUsersController);
-router.patch("/:id", verifyIsAdmMiddleware, updateUserController);
-router.delete("/:id", verifyIsAdmMiddleware, deleteUserController);
+router.post("/users", verifyEmailAvailabilityMiddleware, createUserController);
+router.get(
+  "/users",
+  verifyAuthTokenMiddleware,
+  verifyIsAdmMiddleware,
+  listUsersController
+);
+router.get("/users/profile", verifyAuthTokenMiddleware, profileUserController);
+router.patch(
+  "/users/:id",
+  verifyAuthTokenMiddleware,
+  verifyIsAdmMiddleware,
+  updateUserController
+);
+router.delete(
+  "/users/:id",
+  verifyAuthTokenMiddleware,
+  verifyIsAdmMiddleware,
+  deleteUserController
+);
 router.post("/login", userLoginController);
-router.get("/profile", verifyAuthTokenMiddleware, profileUserController);
 
 export default router;
